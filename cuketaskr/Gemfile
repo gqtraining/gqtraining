@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem 'sqlite3'
+gem 'sequel'
+gem 'cucumber'
+gem 'rspec'
+gem 'rake'
+gem 'database_cleaner'
+gem 'guard-cucumber'
+
