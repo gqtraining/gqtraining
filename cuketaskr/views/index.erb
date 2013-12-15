@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<title>Taskr - track your tasks</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/styles.css"/>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/underscore-min.js"></script>
+<script src="/app.js"></script>
+</head>
+<script type="text/ustemplate" id="task-template">
+<%%if(task.status=="completed"){%>
+ <a class="btn btn-sm btn-danger">uncomplete</a>
+ <%% } else { %>
+ <a class="btn btn-sm btn-info">complete</a>
+ <%% } %><span class="title" data-task-id="<%%=task.id%>">
+  <%%=task.title%>
+  </span>
+</script>
+<script type="text/ustemplate" id="task-edit-template">
+<form class="task-edit-form" data-url="/tasks/<%%=task_id%>">
+<input type="text" name="title" class="task-title-input" value="<%%=content%>" data-task-id="<%%=task_id%>"/>
+</form>
+</script>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Taskr</h1>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well">
+        <form id="task-form">
+          <div class="form-group">
+            <input type="text" id="task-title" class="form-control" name="task[title]" placeholder="What do you want to do today?">
+          </div>
+        </form>
+        <ul class="tasks">
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

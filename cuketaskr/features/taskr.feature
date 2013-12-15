@@ -9,11 +9,12 @@ Background:
     | Buy Milk       | completed |
     | Learn Ruby     | pending   |
     | Finish bugs    | pending   |
-
+@javascript
 Scenario: Add a new task
   When I create a new task "Learn Rspec"
   Then I should be able to see the "Learn Rspec" task
 
+@javascript
 Scenario: Edit a task
   Given that I have a task "Learn Rspc"
   When I edit the task to read "Learn Rspec"

@@ -4,12 +4,15 @@ Given(/^that I have a list of tasks available$/) do |task_table|
   end
 end
 When(/^I create a new task "(.*?)"$/) do |title|
-  Task.create :title=>title
+  visit '/'
+  fill_in 'task-title',:with=>title
+  find('input#task-title').native.send_key(:return)
 end
 
 Then(/^I should be able to see the "(.*?)" task$/) do |title|
-  @tasks = Task.all
-  @tasks.collect {|t| t[:title]}.should include(title)
+  page.within("ul.tasks") do
+    page.should have_content(title)
+  end
 end
 
 Given(/^that I have a task "(.*?)"$/) do |title|
@@ -17,13 +20,23 @@ Given(/^that I have a task "(.*?)"$/) do |title|
 end
 
 When(/^I edit the task to read "(.*?)"$/) do |title|
-  @task.update(:title=>title)
+  #@task.update(:title=>title)
+  visit '/'
+  task_id = @task.attributes[:id]
+  task_li= find("li.task#task-#{task_id}")
+  within(task_li) do
+    find('span').click
+    fill_in 'title',:with=>title
+    find('input').native.send_key(:return)
+  end
+  #click_on @task.title
 end
 
 Then(/^I should be able to see "(.*?)" instead of "(.*?)"$/) do |new_title, old_title|
-  @tasks = Task.all
-  @tasks.collect {|t| t[:title]}.should include(new_title)
-  @tasks.collect {|t| t[:title]}.should_not include(old_title)
+  within('ul.tasks') do
+    page.should_not have_content(old_title)
+    page.should have_content(new_title)
+  end
 end
 
 When(/^I mark the task as complete$/) do
