@@ -14,6 +14,14 @@ post '/tasks' do
   json Task.create(params.select {|k,v| tparams.include?(k)})
 end
 
+post '/tasks/upload' do
+  content = params[:tasks_file][:tempfile].read
+  content.lines.each do |t|
+    Task.create(:title=>t)
+  end
+  redirect '/'
+end
+
 post '/tasks/:id' do
   tparams=['title','status']
   task=Task.where(:id=>params[:id]).first

@@ -41,6 +41,16 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form action="/tasks/upload" method="post" id="upload-form" enctype="multipart/form-data">
+        <label for="tasks_file">Upload file to import
+          <input id="tasks_file" name="tasks_file" type="file"/>
+        </label>
+        <input type="submit" class="btn btn-primary" value="Upload"/>
+      </form>
+    </div>
+  </div>
 </div>
 </body>
 </html>

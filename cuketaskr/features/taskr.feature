@@ -20,6 +20,12 @@ Scenario: Edit a task
   When I edit the task to read "Learn Rspec"
   Then I should be able to see "Learn Rspec" instead of "Learn Rspc"
 
+@javascript
+Scenario: Upload tasks
+  Given that I have a file called "tasks.txt"
+  When I upload the file
+  Then I should be able to see the new tasks specified in "tasks.txt"
+
 Scenario: Complete a task
   Given that I have a task "Learn Cucumber"
   When I mark the task as complete
